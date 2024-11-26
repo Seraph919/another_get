@@ -134,10 +134,12 @@ char    *get_line(char **saved, int readen)
         *saved = ft_strdup(pos + 1);
         // printf("\n*****11******\n");
         *(pos + 1) = '\0';
-        // printf("\n*****12******\n");
+        // printf("\ n*****12******\n");
         return (temp_saved);
     }
-    return (*saved);
+    temp_saved = ft_strdup(*saved);
+    *saved = NULL;
+    return (temp_saved);
 }
 
 // ? saved = wach \n wach

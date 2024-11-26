@@ -5,8 +5,10 @@ char *get_next_line(int fd)
     static char *saved;
     char    *allocated;
     int         readen;
+    int           boole;
 
     // printf("\n*****1******\n");
+    boole = 0;
     protected_alloc(&saved, &allocated);
     // printf("\n*****2******\n");
     readen = 1;
@@ -60,5 +62,22 @@ int main()
     
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
     
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
 }
