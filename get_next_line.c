@@ -41,43 +41,56 @@ int main()
         return (0);
     char *s = get_next_line(fd);
     printf("[%d] : %s", i, s);
+    free(s);
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    free(s);
 
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
+    free(s);
     
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
+    free(s);
     
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
+    free(s);
     
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
-    
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
+    free(s);
 
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
-    
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i, s);
-    
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
+    free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
 }

@@ -91,7 +91,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	len2 = ft_strlen(s2);
 	returned = malloc(sizeof(char) * len1 + len2 + 1);
 	if (!returned)
-		return (free(s1), free(s2), NULL);
+		return (free(s1), s1 = NULL, NULL);
 	while (s1[++i])
 		returned[i] = s1[i];
 	i = 0;
@@ -133,6 +133,7 @@ char    *get_line(char **saved, int readen)
         return (temp_saved);
     }
     temp_saved = ft_strdup(*saved);
+	free(*saved);
     *saved = NULL;
     return (temp_saved);
 }
