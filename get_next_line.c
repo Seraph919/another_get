@@ -6,51 +6,59 @@ char *get_next_line(int fd)
     char    *allocated;
     int         readen;
 
-    allocated = malloc((size_t) BUFFER_SIZE + 1);
-    if (!allocated)
-    {
-        if (saved)
-            free(saved);
-        return (saved = NULL, NULL);
-    }
+    // printf("\n*****1******\n");
+    protected_alloc(&saved, &allocated);
+    // printf("\n*****2******\n");
     readen = 1;
-    while (ft_strchr(saved, '\n') && readen > 0)
+    while (!(ft_strchr(saved, '\n')) && readen > 0)
     {
+        // printf("\n*****3******\n");
         readen = read(fd, allocated, BUFFER_SIZE);
-        saved = 
+        // printf("\n*****4******\n");
+        allocated[readen] = '\0';
+        if (readen == 0)
+            break;
+        if (readen == -1)
+            return (free(allocated), free(saved), NULL);
+        saved = ft_strjoin(saved, allocated);
+        // printf("\n*****5******\n");
+        if (!saved)
+            return (free(allocated), free(saved), NULL);
+        // printf("\n*****6******\n");
     }
     free(allocated);
-    return (get_line(saved, readen));
+    // printf("\n*****7******\n");
+    return (get_line(&saved, readen));
 }
 
-// int main()
-// {
-//     int i = 1;
-//     int fd = open("files.txt", O_RDONLY | O_CREAT, 0644);
-//     if (fd == -1)
-//         return (0);
-//     char *s = get_next_line(fd);
-//     printf("[%d] : %s", i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-// }
+int main()
+{
+    int i = 1;
+    int fd = open("files.txt", O_RDONLY | O_CREAT, 0644);
+    if (fd == -1)
+        return (0);
+    char *s = get_next_line(fd);
+    printf("[%d] : %s", i, s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i, s);
+    
+}
