@@ -22,5 +22,6 @@ char	*ft_strjoin(char *s1, char *s2);
 void    protected_alloc(char **saved, char **allocated);
 size_t	ft_strlen(const char *str);
 char    *get_line(char **saved, int readen);
+int	    ft_strcmp(char *s1, char *s2);
 
 #endif

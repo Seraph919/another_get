@@ -124,24 +124,30 @@ char    *get_line(char **saved, int readen)
 {
     char *temp_saved;
     char *pos;
-    // printf("\n*****8******\n");
     if (readen > 0)
     {
         temp_saved = *saved;
-        // printf("\n*****9******\n");
         pos = ft_strchr(temp_saved, '\n');
-        // printf("\n*****10******\n");
         *saved = ft_strdup(pos + 1);
-        // printf("\n*****11******\n");
         *(pos + 1) = '\0';
-        // printf("\ n*****12******\n");
         return (temp_saved);
     }
     temp_saved = ft_strdup(*saved);
     *saved = NULL;
     return (temp_saved);
 }
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
 
-// ? saved = wach \n wach
-// ! returned : wach \n
-// ? saved :  wach
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}

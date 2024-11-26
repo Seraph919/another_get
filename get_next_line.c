@@ -7,7 +7,6 @@ char *get_next_line(int fd)
     int         readen;
     int           boole;
 
-    // printf("\n*****1******\n");
     boole = 0;
     protected_alloc(&saved, &allocated);
     // printf("\n*****2******\n");
@@ -29,7 +28,8 @@ char *get_next_line(int fd)
         // printf("\n*****6******\n");
     }
     free(allocated);
-    // printf("\n*****7******\n");
+    if (ft_strcmp(saved, "") == 0)
+        return (free(saved), NULL);
     return (get_line(&saved, readen));
 }
 
