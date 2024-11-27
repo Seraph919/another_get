@@ -3,7 +3,7 @@
 
 #ifndef BUFFER_SIZE
 
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 1100
 #endif
 
 # include <unistd.h>
@@ -21,7 +21,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 void    protected_alloc(char **saved, char **allocated);
 size_t	ft_strlen(const char *str);
-char    *get_line(char **saved, int readen);
+char    *ft_get_line(char **saved, int readen);
 int	    ft_strcmp(char *s1, char *s2);
 
 #endif

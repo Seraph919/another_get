@@ -6,7 +6,9 @@ char	*ft_strchr(const char *str, int search_str)
 
 	i = 0;
     if (!str)
+	{
         return (NULL);
+	}
 	while (str[i])
 	{
 		if (str[i] == (char)search_str)
@@ -26,7 +28,9 @@ char	*ft_strdup(const char *str1)
 
 	i = 0;
     if (!str1)
+	{
         return (NULL);
+	}
 	allocated = malloc(sizeof(char) * ft_strlen(str1) + 1);
 	if (!allocated)
 		return (NULL);
