@@ -49,6 +49,14 @@ char    *ft_get_line(char **saved, int readen)
     return (temp_saved);
 }
 
+void fireforce(char **saved, char **allocated)
+{
+    free(*saved);
+    *saved = NULL;
+    free(*allocated);
+    allocated = NULL;
+}
+
 char *get_next_line(int fd)
 {
     static char *saved[1024];
@@ -58,7 +66,7 @@ char *get_next_line(int fd)
         return (NULL);
     protected_alloc(&saved[fd], &allocated);
     if (!saved[fd] || !allocated)
-        return (free (saved[fd]), allocated = NULL, saved[fd] = NULL, NULL);
+        return (fireforce(&saved[fd], &allocated), NULL);
     readen = 1;
     while (!(ft_strchr(saved[fd], '\n')) && readen > 0)
     {
@@ -66,122 +74,121 @@ char *get_next_line(int fd)
         if (readen == 0)
             break;
         if (readen == -1)
-            return (free(allocated), allocated = NULL, free(saved[fd]), saved[fd] = NULL, NULL);
+            return (fireforce(&saved[fd], &allocated), NULL);
         allocated[readen] = '\0';
         saved[fd] = ft_strjoin(saved[fd], allocated);
         if (!saved[fd])
-            return (free(allocated), free(saved[fd]),allocated = NULL, saved[fd] = NULL, NULL);
+            return (fireforce(&saved[fd], &allocated), NULL);
     }
     free(allocated);
-    allocated = NULL;
     if (ft_strcmp(saved[fd], "") == 0)
         return (free(saved[fd]), saved[fd] = NULL, NULL);
     return (ft_get_line(&saved[fd], readen));
 }
 
-/*int main()
-{
-    int i = 1;
-    int fd = open("files.txt", O_RDONLY | O_CREAT, 0644);
-    int fdd = open("files.txt", O_CREAT, 0644);
-    if (fd == -1 || fdd == -1)
-        return (0);
-    printf("%d        %d \n", fd, fdd);
-    char *s = get_next_line(fd);
-    printf("[%d] : %s", i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+// int main()
+// {
+//     int i = 1;
+//     int fd = open("files.txt", O_RDONLY | O_CREAT, 0644);
+//     int fdd = open("files.txt", O_CREAT, 0644);
+//     if (fd == -1 || fdd == -1)
+//         return (0);
+//     printf("%d        %d \n", fd, fdd);
+//     char *s = get_next_line(fd);
+//     printf("[%d] : %s", i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
     
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
-    s = get_next_line(fdd);
-    printf("[%d] : %s", ++i, s);
-    free(s);
+//     s = get_next_line(fd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
+//     s = get_next_line(fdd);
+//     printf("[%d] : %s", ++i, s);
+//     free(s);
 
 
-}*/
+// }

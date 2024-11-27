@@ -30,7 +30,13 @@ void  protected_alloc(char **saved, char **allocated)
         *saved = NULL;
     }
 }   
-
+void fireforce(char **saved, char **allocated)
+{
+    free(*saved);
+    *saved = NULL;
+    free(*allocated);
+    allocated = NULL;
+}
 char    *ft_get_line(char **saved, int readen)
 {
     char *temp_saved;
@@ -58,7 +64,7 @@ char *get_next_line(int fd)
         return (NULL);
     protected_alloc(&saved, &allocated);
     if (!saved || !allocated)
-        return (free (saved), allocated = NULL, saved = NULL, NULL);
+        return (fireforce(&saved, &allocated), NULL);
     readen = 1;
     while (!(ft_strchr(saved, '\n')) && readen > 0)
     {
@@ -66,14 +72,13 @@ char *get_next_line(int fd)
         if (readen == 0)
             break;
         if (readen == -1)
-            return (free(allocated), allocated = NULL, free(saved), saved = NULL, NULL);
+            return (fireforce(&saved, &allocated), NULL);
         allocated[readen] = '\0';
         saved = ft_strjoin(saved, allocated);
         if (!saved)
-            return (free(allocated), free(saved),allocated = NULL, saved = NULL, NULL);
+            return (fireforce(&saved, &allocated), NULL);
     }
     free(allocated);
-    allocated = NULL;
     if (ft_strcmp(saved, "") == 0)
         return (free(saved), saved = NULL, NULL);
     return (ft_get_line(&saved, readen));
