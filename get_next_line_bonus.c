@@ -54,7 +54,7 @@ char *get_next_line(int fd)
     static char *saved[1024];
     char    *allocated;
     int         readen;
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if ((fd < 0 || fd > 1024) || BUFFER_SIZE <= 0)
         return (NULL);
     protected_alloc(&saved[fd], &allocated);
     if (!saved[fd] || !allocated)
@@ -69,7 +69,7 @@ char *get_next_line(int fd)
             return (free(allocated), allocated = NULL, free(saved[fd]), saved[fd] = NULL, NULL);
         allocated[readen] = '\0';
         saved[fd] = ft_strjoin(saved[fd], allocated);
-        if (!saved)
+        if (!saved[fd])
             return (free(allocated), free(saved[fd]),allocated = NULL, saved[fd] = NULL, NULL);
     }
     free(allocated);
@@ -79,7 +79,7 @@ char *get_next_line(int fd)
     return (ft_get_line(&saved[fd], readen));
 }
 
-int main()
+/*int main()
 {
     int i = 1;
     int fd = open("files.txt", O_RDONLY | O_CREAT, 0644);
@@ -184,4 +184,4 @@ int main()
     free(s);
 
 
-}
+}*/
