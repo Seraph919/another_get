@@ -1,8 +1,5 @@
 #include "get_next_line.h"
 
-// TODO : get_line();
-// TODO : ft_join free and allocated empty
-
 char	*ft_strchr(const char *str, int search_str)
 {
 	int	i;
@@ -20,17 +17,8 @@ char	*ft_strchr(const char *str, int search_str)
 		return (&((char *)str)[i]);
 	return (NULL);
 }
-size_t	ft_strlen(const char *str)
-{
-	int		i;
 
-	i = 0;
-    if (!str)
-        return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
+
 char	*ft_strdup(const char *str1)
 {
 	int		i;
@@ -103,39 +91,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	returned[len1 + i] = '\0';
     free(s1);
 	return (returned);
-}
-void  protected_alloc(char **saved, char **allocated)
-{
-    if (!*saved)
-    {    
-        *saved = ft_strdup("");
-        if (!*saved)
-            *saved = NULL;
-    }
-    *allocated = malloc((size_t) BUFFER_SIZE + 1);
-    if (!*allocated)
-    {
-        if (*saved)
-            free(*saved);
-        *saved = NULL;
-    }
-}   
-char    *get_line(char **saved, int readen)
-{
-    char *temp_saved;
-    char *pos;
-    if (readen > 0)
-    {
-        temp_saved = *saved;
-        pos = ft_strchr(temp_saved, '\n');
-        *saved = ft_strdup(pos + 1);
-        *(pos + 1) = '\0';
-        return (temp_saved);
-    }
-    temp_saved = ft_strdup(*saved);
-	free(*saved);
-    *saved = NULL;
-    return (temp_saved);
 }
 int	ft_strcmp(char *s1, char *s2)
 {
